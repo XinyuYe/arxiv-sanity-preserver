@@ -1,4 +1,19 @@
 
+# 498
+
+Key Files
+
+```python
+bert.py
+bert_nn.py
+d2v.model
+doc2vec.py
+pre_summary.py
+fetch_papers.py # for fetching paper
+```
+
+The original Readme is as follows
+
 # arxiv sanity preserver
 
 This project is a web interface that attempts to tame the overwhelming flood of papers on Arxiv. It allows researchers to keep track of recent papers, search for papers, sort papers by similarity to any paper, see recent popular papers, to add papers to a personal library, and to get personalized recommendations of (new or old) Arxiv papers. This code is currently running live at [www.arxiv-sanity.com/](http://www.arxiv-sanity.com/), where it's serving 25,000+ Arxiv papers from Machine Learning (cs.[CV|AI|CL|LG|NE]/stat.ML) over the last ~3 years. With this code base you could replicate the website to any of your favorite subsets of Arxiv by simply changing the categories in `fetch_papers.py`.
