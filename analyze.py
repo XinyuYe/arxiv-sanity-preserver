@@ -10,6 +10,7 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 from utils import Config, safe_pickle_dump
+from gensim.models.doc2vec import Doc2Vec, TaggedDocument 
 
 seed(1337)
 max_train = 5000 # max number of tfidf training documents (chosen randomly), for memory efficiency
@@ -85,17 +86,26 @@ print("writing", Config.meta_path)
 safe_pickle_dump(out, Config.meta_path)
 
 print("precomputing nearest neighbor queries in batches...")
-X = X.todense() # originally it's a sparse matrix
+# X = X.todense() # originally it's a sparse matrix
 sim_dict = {}
-batch_size = 200
-for i in range(0,len(pids),batch_size):
-  i1 = min(len(pids), i+batch_size)
-  xquery = X[i:i1] # BxD
-  ds = -np.asarray(np.dot(X, xquery.T)) #NxD * DxB => NxB
-  IX = np.argsort(ds, axis=0) # NxB
-  for j in range(i1-i):
-    sim_dict[pids[i+j]] = [pids[q] for q in list(IX[:50,j])]
-  print('%d/%d...' % (i, len(pids)))
+# batch_size = 200
+# for i in range(0,len(pids),batch_size):
+#   i1 = min(len(pids), i+batch_size)
+#   xquery = X[i:i1] # BxD
+#   ds = -np.asarray(np.dot(X, xquery.T)) #NxD * DxB => NxB
+#   IX = np.argsort(ds, axis=0) # NxB
+#   for j in range(i1-i):
+#     sim_dict[pids[i+j]] = [pids[q] for q in list(IX[:50,j])]
+#   print('%d/%d...' % (i, len(pids)))
+
+model = Doc2Vec.load("d2v.model")
+for pid in pids:
+  tmp = []
+  try:
+    tmp = model.docvecs.most_similar(pid)
+  except:
+    tmp = []
+  sim_dict[pid] = [sim_pid for sim_pid, distance in tmp]
 
 print("writing", Config.sim_path)
 safe_pickle_dump(sim_dict, Config.sim_path)

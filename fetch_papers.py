@@ -111,9 +111,9 @@ if __name__ == "__main__":
       print(response)
       break
 
-    if num_added == 0 and args.break_on_no_added == 1:
-      print('No new papers were added. Assuming no new papers exist. Exiting.')
-      break
+    # if num_added == 0 and args.break_on_no_added == 1:
+    #   print('No new papers were added. Assuming no new papers exist. Exiting.')
+    #   break
 
     print('Sleeping for %i seconds' % (args.wait_time , ))
     time.sleep(args.wait_time + random.uniform(0, 3))

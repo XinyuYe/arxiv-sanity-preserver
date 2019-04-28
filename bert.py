@@ -204,15 +204,15 @@ def convert_examples_to_features(examples, seq_length, tokenizer):
 #     return examples
 
 
-def read_summary(summaries):
-    """Read a list of `InputExample`s from an input file."""
-    examples = []
-    unique_id = 0
-    for line in summaries:
-        examples.append(
-            InputExample(unique_id=unique_id, text_a=text_a, text_b=text_b))
-        unique_id += 1
-    return examples
+# def read_summary(summaries):
+#     """Read a list of `InputExample`s from an input file."""
+#     examples = []
+#     unique_id = 0
+#     for line in summaries:
+#         examples.append(
+#             InputExample(unique_id=unique_id, text_a=text_a, text_b=text_b))
+#         unique_id += 1
+#     return examples
 
 
 def main():

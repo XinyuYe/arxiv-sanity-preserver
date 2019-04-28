@@ -10,3 +10,8 @@ env/
 data
 *.DS_Store
 twitter.txt
+*.png
+
+.ipynb_checkpoints/ 
+.pylintrc
+.ropeproject/ 
